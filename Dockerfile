@@ -2,6 +2,10 @@ FROM n8nio/n8n:2.3.4
 
 USER root
 
+# Install poppler-utils for PDF processing (pdftoppm, pdftotext, pdfinfo)
+# Used by Workflow A to convert PDF comprobantes to images before Gemini Vision
+RUN apk add --no-cache poppler-utils
+
 # Install exceljs in a temp dir (using plain npm, no catalog: protocol from n8n's package.json)
 # Then copy it + dependencies to the task-runner's node_modules path
 RUN mkdir -p /tmp/excelbuild && \
